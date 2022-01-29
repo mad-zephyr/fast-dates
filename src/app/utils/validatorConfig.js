@@ -46,6 +46,16 @@ const validatorConfig = {
     isRequired: {
       message: 'Необходимо согласие с лицензионным соглашением'
     }
+  },
+  content: {
+    isRequired: {
+      message: 'Поле не может быть пустым'
+    }
+  },
+  userId: {
+    isRequired: {
+      message: 'Ваберите свое имя'
+    }
   }
 }
 

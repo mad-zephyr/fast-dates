@@ -39,11 +39,17 @@ export function validator(data, config) {
         statusValidate = data.qualities.length === 0
         break
       }
+      case 'userId' : {
+        console.log(currentData)
+        statusValidate = currentData.trim() === ''
+        break
+      }
       default:
         break
     }
     if (statusValidate) return config.message
   }
+
   for (const fieldName in data) {
     for (const validateMethod in config[fieldName]) {
       const error = validate(
@@ -56,5 +62,6 @@ export function validator(data, config) {
       }
     }
   }
+
   return errors
 }

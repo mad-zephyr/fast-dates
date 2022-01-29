@@ -7,7 +7,6 @@ import api from '../../api'
 
 const UserEditForm = () => {
   const params = useParams()
-  // eslint-disable-next-line no-unused-vars
   const history = useHistory()
 
   const { userId } = params
@@ -44,7 +43,7 @@ const UserEditForm = () => {
   }
 
   function uppdateAllUsers() {
-    const UPPDATEDUSERS = JSON.parse(window.localStorage.getItem('users')).map(user => {
+    const UPDATEDUSERS = JSON.parse(window.localStorage.getItem('users')).map(user => {
       if (user._id === data._id) {
         const normQuality = []
           for (const quality in data.qualities) {
@@ -62,14 +61,15 @@ const UserEditForm = () => {
         return user
       }
     })
-    console.log(UPPDATEDUSERS)
-    window.localStorage.setItem('users', JSON.stringify(UPPDATEDUSERS))
+
+    window.localStorage.setItem('users', JSON.stringify(UPDATEDUSERS))
     setTimeout(() => {
       history.goBack()
-    }, 500)
+    }, 200)
   }
 
   const handleChange = ({ target }) => {
+    console.log(target.value)
     if (target) {
       setData((prevState) => ({
         ...prevState,
@@ -77,7 +77,7 @@ const UserEditForm = () => {
       }))
     }
   }
-// {_id: '67rdca3eeb7f6fgeed4711012', name: 'Троль', color: 'success'}
+
   const transformQualitysForMultiSelect = (arr) => {
     if (arr) {
       return arr.map(quality => ({
@@ -105,7 +105,8 @@ const UserEditForm = () => {
   ]
 
   if (professions && qualities) {
-    return (<div className='container col-md-6 offset-md-3'>
+    return (
+    <div className='container col-md-6 offset-md-3'>
       <div className="card shadow-sm">
         <div className="card-body">
           <TextField

@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 const SelectField = (props) => {
-  const { label, options, onChange, value, name, defaultOption, error } = props
-  const [touched, setTouched] = useState(false)
+  const { label, options, onChange, value, name, defaultOption, error, onSubmit } = props
+  const [touched, setTouched] = useState()
+
+  useEffect(() => {
+    setTouched(false)
+  }, [onSubmit])
 
   const getInputClasses = () => {
     return 'form-select' + (error && touched ? ' is-invalid' : '')
@@ -28,16 +32,14 @@ const SelectField = (props) => {
         onChange={onChange}
         value={value}
       >
-        {defaultOption && <option disabled value=''>{defaultOption}</option>}
+        { defaultOption && <option disabled value=''>{defaultOption}</option> }
 
         { optionsArray && optionsArray.map(option => (
-          <option key={option._id}>{option.name}</option>
+          <option key={option._id} data-id={option._id}>{option.name}</option>
         ))}
 
       </select>
-      {error && <div className="invalid-feedback">
-        {error}
-      </div>}
+      {error && <div className="invalid-feedback"> {error} </div>}
     </div>
   )
 }
@@ -49,6 +51,8 @@ SelectField.propTypes = {
   error: PropTypes.string,
   defaultOption: PropTypes.string,
   onChange: PropTypes.func,
+  onSubmit: PropTypes.bool,
+  changeTouchState: PropTypes.func,
   options: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 }
 
