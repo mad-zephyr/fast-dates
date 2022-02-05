@@ -3,14 +3,14 @@ import qualityService from '../services/quality.services'
 import PropTypes from 'prop-types'
 import { toast } from 'react-toastify'
 
-const QulitiesContext = React.createContext()
+const QualitiesContext = React.createContext()
 
 export const useQualities = () => {
-  return useContext(QulitiesContext)
+  return useContext(QualitiesContext)
 }
 
 export const QualitiesProvider = ({ children }) => {
-  const [qulities, setQulities] = useState([])
+  const [quality, setQualities] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -25,10 +25,11 @@ export const QualitiesProvider = ({ children }) => {
     }
   }, [error])
 
-  async function getQuality(id) {
+  async function getQuality() {
     try {
-      const { content } = await qualityService.get(id)
-      setQulities(content)
+      const { content } = await qualityService.get()
+      setQualities(content)
+      setLoading(false)
     } catch (error) {
       errorCatcher(error)
     }
@@ -41,9 +42,9 @@ export const QualitiesProvider = ({ children }) => {
   }
 
   return (
-    <QulitiesContext.Provider value={{ isLoading, qulities }}>
+    <QualitiesContext.Provider value={{ isLoading, quality }}>
       {children}
-    </QulitiesContext.Provider>
+    </QualitiesContext.Provider>
   )
 }
 

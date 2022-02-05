@@ -10,8 +10,8 @@ export const useProfession = () => {
 }
 
 export const ProfessionProvider = ({ children }) => {
-  const [isLoading, setLoading] = useState(true)
   const [professions, setProfessions] = useState([])
+  const [isLoading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export const ProfessionProvider = ({ children }) => {
   }
 
   function errorCatcher(error) {
-    const { message } = error.response.data
+    const { message } = error?.response?.data
     setError(message)
     setLoading(false)
   }
@@ -58,5 +58,3 @@ ProfessionProvider.propTypes = {
     PropTypes.node
   ])
 }
-
-export default ProfessionProvider
