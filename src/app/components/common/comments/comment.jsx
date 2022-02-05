@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 const Comment = (props) => {
   const { children, title } = props
+
   return (
     <div className="card mb-3">
       <div className="card-body">
@@ -11,7 +12,9 @@ const Comment = (props) => {
         <div className="bg-light card-body mb-3">
           <div className="row">
             <div className="col">
+
             {children}
+
             </div>
           </div>
         </div>

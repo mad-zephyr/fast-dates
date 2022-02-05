@@ -4,10 +4,6 @@ import PropTypes from 'prop-types'
 const QualityCard = (props) => {
   const { qulities } = props
 
-  const allQualities = qulities.map(quality => (
-    <span key={quality._id} className={`badge bg-${quality.color} ms-1`}>{quality.name}</span>
-  ))
-
   return (
     <div className="card mb-3">
       <div className="card-body d-flex flex-column justify-content-center text-center ">
@@ -15,7 +11,14 @@ const QualityCard = (props) => {
           <span>Qualities</span>
         </h5>
         <p className="card-text">
-          {allQualities}
+          {qulities && qulities.map(quality => (
+                <span
+                  key={quality._id}
+                  className={`badge bg-${quality.color} ms-1`}>
+                    {quality.name}
+                </span>
+              ))
+          }
         </p>
       </div>
     </div>

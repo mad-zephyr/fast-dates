@@ -23,7 +23,6 @@ const CommentsList = ({ commentsData, usersNames, onChange }) => {
 
   const comments = commentsData.map(comment => {
     const { _id: id, created_at: createdAt } = comment
-
     const user = usersNames?.find(user => {
       return user._id === comment.userId
     })

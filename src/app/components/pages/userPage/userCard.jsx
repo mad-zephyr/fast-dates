@@ -21,8 +21,8 @@ const UserCard = () => {
         <div className="col-md-4 mb-2">
           <div style={style}>
             <Card user={user}/>
-            <QualityCard qulities={user.qualities} />
-            <MeetingsCard meetings={user.completedMeetings}/>
+            <QualityCard qulities={user?.qualities} />
+            <MeetingsCard meetings={user?.completedMeetings}/>
           </div>
         </div>
         <div className="col-md-8">
