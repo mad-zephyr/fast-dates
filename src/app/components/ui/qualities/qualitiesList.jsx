@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Quality from './quality'
-import { useUser } from '../../../hooks/useUsers'
+import { useQualities } from '../../../hooks/useQualities'
 
 const QualitiesList = ({ qualities }) => {
-  const { quality } = useUser()
+  const { quality } = useQualities()
   const qualityArr = []
 
   qualities.forEach(id => {

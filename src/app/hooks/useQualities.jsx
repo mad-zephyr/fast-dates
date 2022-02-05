@@ -1,21 +1,21 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import qualityService from '../services/quality.services'
 import PropTypes from 'prop-types'
-import userService from '../services/user.services'
 import { toast } from 'react-toastify'
 
-const UserContext = React.createContext()
+const QulitiesContext = React.createContext()
 
-export const useUser = () => {
-  return useContext(UserContext)
+export const useQualities = () => {
+  return useContext(QulitiesContext)
 }
 
-const UserProvider = ({ children }) => {
-  const [users, setUsers] = useState([])
+export const QualitiesProvider = ({ children }) => {
+  const [qulities, setQulities] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    getUsers()
+    getQuality()
   }, [])
 
   useEffect(() => {
@@ -25,11 +25,10 @@ const UserProvider = ({ children }) => {
     }
   }, [error])
 
-  async function getUsers() {
+  async function getQuality(id) {
     try {
-      const { content } = await userService.get()
-      setUsers(content)
-      setLoading(false)
+      const { content } = await qualityService.get(id)
+      setQulities(content)
     } catch (error) {
       errorCatcher(error)
     }
@@ -42,17 +41,15 @@ const UserProvider = ({ children }) => {
   }
 
   return (
-    <UserContext.Provider value={{ users }}>
-      {isLoading ? 'Loading...' : children }
-    </UserContext.Provider>
+    <QulitiesContext.Provider value={{ isLoading, qulities }}>
+      {children}
+    </QulitiesContext.Provider>
   )
 }
 
-UserProvider.propTypes = {
+QualitiesProvider.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ])
 }
-
-export default UserProvider
