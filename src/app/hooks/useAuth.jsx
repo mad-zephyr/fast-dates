@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
     try {
       const { data } = await httpAuth.post(url, { email, password, returnSecureToken: true })
       setToken(data)
-      await createUser({ _id: data.localId, email: email, password, profession, qualities, sex })
+      await createUser({ _id: data.localId, email, password, profession, qualities, sex })
     } catch (error) {
       errorCatcher(error)
       const { code, message } = error.response.data.error
