@@ -5,6 +5,7 @@ import cn from 'classnames'
 
 const MultiSelectField = ({ label, options, onChange, name, error, value }) => {
   const [touched, setTouched] = useState(false)
+
   const qualities = !Array.isArray(options) && typeof options === 'object'
     ? Object.keys(options).map(qualityName => (
       { value: options[qualityName]._id, label: options[qualityName].name }

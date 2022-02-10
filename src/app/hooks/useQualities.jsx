@@ -10,7 +10,7 @@ export const useQualities = () => {
 }
 
 export const QualitiesProvider = ({ children }) => {
-  const [quality, setQualities] = useState([])
+  const [qualities, setQualities] = useState([])
   const [isLoading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
@@ -42,7 +42,7 @@ export const QualitiesProvider = ({ children }) => {
   }
 
   return (
-    <QualitiesContext.Provider value={{ isLoading, quality }}>
+    <QualitiesContext.Provider value={{ isLoading, qualities }}>
       {children}
     </QualitiesContext.Provider>
   )

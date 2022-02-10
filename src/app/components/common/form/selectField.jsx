@@ -20,7 +20,7 @@ const SelectField = (props) => {
 
   return (
     <div className="col-md-3 mb-3 w-100">
-      <label >
+      <label>
         {label}
       </label>
 
@@ -35,7 +35,7 @@ const SelectField = (props) => {
         { defaultOption && <option disabled value=''>{defaultOption}</option> }
 
         { optionsArray && optionsArray.map(option => (
-          <option key={option._id} data-id={option._id}>{option.name}</option>
+          <option key={option.value} value={option.value}>{option.label}</option>
         ))}
 
       </select>
