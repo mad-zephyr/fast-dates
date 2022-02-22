@@ -3,27 +3,20 @@ import PropTypes from 'prop-types'
 import Quality from './quality'
 import { useQualities } from '../../../hooks/useQualities'
 
-const QualitiesList = ({ qualities: qualitiesUser }) => {
-  const { isLoading, qualities } = useQualities()
-  const qualityArr = []
-
-  qualitiesUser?.forEach(id => {
-    qualities?.forEach(qualityObj => qualityObj._id === id && qualityArr.push(qualityObj))
-  })
-
-  return (
-    <>
-      {
-        !isLoading
-          ? qualityArr.map((qual) => <Quality key={qual._id} {...qual} />)
-          : 'Loading...'
-      }
-    </>
-  )
+const QualitiesList = ({ qualities }) => {
+    const { isLoading } = useQualities()
+    if (isLoading) return 'Loading...'
+    return (
+        <>
+            {qualities.map((qual) => (
+                <Quality key={qual} id={qual} />
+            ))}
+        </>
+    )
 }
 
 QualitiesList.propTypes = {
-  qualities: PropTypes.array
+    qualities: PropTypes.array
 }
 
 export default QualitiesList

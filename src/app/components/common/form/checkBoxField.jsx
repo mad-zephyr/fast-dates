@@ -1,52 +1,39 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import cn from 'classnames'
 
-const CheckBoxField = (props) => {
-  const { onChange, value, children, name, error } = props
-  const [touched, setTouched] = useState(false)
-
-  const handlerChange = (e) => {
-    setTouched(true)
-    onChange({
-       target: { name: name, value: e.target.checked }
-    })
-  }
-
-  return (
-    <div className="form-check form-switch mb-3">
-      <input
-        className={cn('form-check-input', error && touched && 'is-invalid')}
-        type="checkbox"
-        role="switch"
-        id={name}
-        name={name}
-        defaultChecked={value}
-        onBlur={setTouched}
-        onClick={handlerChange}
-      />
-      <label
-        className="form-check-label"
-        htmlFor="flexSwitchCheckChecked">
-          {children}
-      </label>
-       <div className="invalid-feedback">
-        {error}
-      </div>
-    </div>
-  )
+const CheckBoxField = ({ name, value, onChange, children, error }) => {
+    const handleChange = () => {
+        onChange({ name: name, value: !value })
+    }
+    const getInputClasses = () => {
+        return 'form-check-input' + (error ? ' is-invalid' : '')
+    }
+    return (
+        <div className="form-check mb-4">
+            <input
+                className={getInputClasses()}
+                type="checkbox"
+                value=""
+                id={name}
+                onChange={handleChange}
+                checked={value}
+            />
+            <label className="form-check-label" htmlFor={name}>
+                {children}
+            </label>
+            {error && <div className="invalid-feedback">{error}</div>}
+        </div>
+    )
 }
-
 CheckBoxField.propTypes = {
-  value: PropTypes.bool,
-  label: PropTypes.string,
-  name: PropTypes.string,
-  error: PropTypes.string,
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.arrayOf(PropTypes.node)
-  ]),
-  onChange: PropTypes.func
+    name: PropTypes.string,
+    value: PropTypes.bool,
+    onChange: PropTypes.func,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]),
+    error: PropTypes.string
 }
 
 export default CheckBoxField

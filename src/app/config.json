@@ -1,4 +1,4 @@
 {
-	"apiEndPoint": "https://fast-date-app-default-rtdb.europe-west1.firebasedatabase.app/",
-	"isFirebase": true
+  "apiEndpoint": "https://fast-date-app-default-rtdb.europe-west1.firebasedatabase.app/",
+  "isFireBase": true
 }

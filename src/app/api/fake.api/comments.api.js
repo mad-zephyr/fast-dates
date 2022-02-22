@@ -1,10 +1,10 @@
 const comments = [
     {
-        _id: '67rdca3eeb7f6fg', // comment id
-        userId: '67rdca3eeb7f6fgeed471815', // id's who write comment
-        pageId: '67rdca3eeb7f6fgeed471815', // id for who comment wrote
+        _id: '67rdca3eeb7f6fg',
+        userId: '67rdca3eeb7f6fgeed471815',
+        pageId: '67rdca3eeb7f6fgeed471815',
         content: 'Lorem ipsum dolor',
-        created_at: '1633576399367' // timestamp
+        created_at: '1633576399367'
     },
     {
         _id: '67rdca3eeb7f6fgdasd',
