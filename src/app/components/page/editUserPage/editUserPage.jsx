@@ -6,7 +6,10 @@ import SelectField from '../../common/form/selectField'
 import RadioField from '../../common/form/radioField'
 import MultiSelectField from '../../common/form/multiSelectField'
 import BackHistoryButton from '../../common/backButton'
-import { useAuth, useProfessions, useQualities } from '../../../hooks'
+import { useAuth } from '../../../hooks'
+import { useSelector } from 'react-redux'
+import { getQualities, getQualitiesLoadingStatus } from '../../../store/qualities'
+import { getProfessions, getProfessionsLoadingStatus } from '../../../store/professions'
 
 const EditUserPage = () => {
   const { userId } = useParams()
@@ -19,10 +22,12 @@ const EditUserPage = () => {
     qualities: []
   })
   const [isLoading, setLoading] = useState(false)
-  const { qualities, isLoading: qualitiesLoading } = useQualities()
-  const { professions, isLoading: professionsLoading } = useProfessions()
-  const { currentUser, updateUser } = useAuth()
 
+  const { currentUser, updateUser } = useAuth()
+  const qualities = useSelector(getQualities())
+  const qualitiesLoading = useSelector(getQualitiesLoadingStatus())
+  const professions = useSelector(getProfessions())
+  const professionsLoading = useSelector(getProfessionsLoadingStatus())
   const [errors, setErrors] = useState({})
 
   const handleSubmit = async (e) => {
@@ -35,10 +40,8 @@ const EditUserPage = () => {
       ...data,
       qualities: data.qualities.map(quality => quality.value)
     }
-    console.log(updatedUser)
     try {
       await updateUser(updatedUser)
-      console.log(history)
       history.push(`/users/${userId}/edit`)
     } catch (error) {
       console.log(error)
@@ -77,7 +80,6 @@ const EditUserPage = () => {
   useEffect(() => validate(), [data])
 
   const handleChange = target => {
-    console.log(target)
     setData((prevState) => ({
       ...prevState,
       [target.name]: target.value

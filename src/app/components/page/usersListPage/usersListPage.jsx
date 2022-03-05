@@ -7,16 +7,19 @@ import SearchStatus from '../../ui/searchStatus'
 import UserTable from '../../ui/usersTable'
 import _ from 'lodash'
 import { useUser } from '../../../hooks/useUsers'
-import { useProfessions } from '../../../hooks/useProfession'
 import { useAuth } from '../../../hooks/useAuth'
+import { useSelector } from 'react-redux'
+import { getProfessions, getProfessionsLoadingStatus } from '../../../store/professions'
+
 const UsersListPage = () => {
     const { users } = useUser()
+    const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' })
     const { currentUser } = useAuth()
-    const { isLoading: professionsLoading, professions } = useProfessions()
     const [currentPage, setCurrentPage] = useState(1)
     const [searchQuery, setSearchQuery] = useState('')
     const [selectedProf, setSelectedProf] = useState()
-    const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' })
+    const professions = useSelector(getProfessions())
+    const professionsLoading = useSelector(getProfessionsLoadingStatus())
     const pageSize = 8
 
     const handleDelete = (userId) => {
@@ -58,17 +61,14 @@ const UsersListPage = () => {
         function filterUsers(data) {
             const filteredUsers = searchQuery
                 ? data.filter(
-                      (user) =>
-                          user.name
-                              .toLowerCase()
-                              .indexOf(searchQuery.toLowerCase()) !== -1
-                  )
+                    (user) => user.name
+                        .toLowerCase()
+                        .indexOf(searchQuery.toLowerCase()) !== -1
+                )
                 : selectedProf
                 ? data.filter(
-                      (user) =>
-                          JSON.stringify(user.profession) ===
-                          JSON.stringify(selectedProf)
-                  )
+                    (user) => JSON.stringify(user.profession) === JSON.stringify(selectedProf)
+                )
                 : data
             return filteredUsers.filter((u) => u._id !== currentUser._id)
         }
@@ -97,7 +97,6 @@ const UsersListPage = () => {
                             className="btn btn-secondary mt-2"
                             onClick={clearFilter}
                         >
-                            {' '}
                             Очистить
                         </button>
                     </div>

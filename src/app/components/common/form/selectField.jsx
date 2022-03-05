@@ -8,6 +8,7 @@ const SelectField = ({ label, value, onChange, defaultOption, options, error, na
   const handleChange = ({ target }) => {
     onChange({ name: target.name, value: target.value })
   }
+
   const optionsArray =
     !Array.isArray(options) && typeof options === 'object'
       ? Object.keys(options).map(optionName => ({
@@ -28,13 +29,13 @@ const SelectField = ({ label, value, onChange, defaultOption, options, error, na
         onChange={handleChange}
         name={name}
       >
-        <option disabled value="">
+        <option disabled value={defaultOption}>
           {defaultOption}
         </option>
         {optionsArray &&
           optionsArray.map(option => (
-            <option value={option._id} key={option._id}>
-              {option.name}
+            <option value={option._id || option.value} key={option._id || option.value}>
+              {option.name || option.label}
             </option>
           ))}
       </select>
