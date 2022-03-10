@@ -6,12 +6,14 @@ import PropTypes from 'prop-types'
 const AddCommentForm = ({ onSubmit }) => {
     const [data, setData] = useState({})
     const [errors, setErrors] = useState({})
+
     const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
             [target.name]: target.value
         }))
     }
+
     const validatorConfig = {
         content: {
             isRequired: {

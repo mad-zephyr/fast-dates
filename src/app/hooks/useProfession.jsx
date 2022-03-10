@@ -9,7 +9,7 @@ export const useProfessions = () => {
     return useContext(ProfessionContext)
 }
 
-const ProfessionProvider = ({ children }) => {
+export const ProfessionProvider = ({ children }) => {
     const [isLoading, setLoading] = useState(true)
     const [professions, setProfessions] = useState([])
     const [error, setError] = useState(null)
@@ -23,7 +23,6 @@ const ProfessionProvider = ({ children }) => {
     useEffect(() => {
         getProfessionsList()
     }, [])
-
     function errorCatcher(error) {
         const { message } = error.response.data
         setError(message)
@@ -57,5 +56,3 @@ ProfessionProvider.propTypes = {
         PropTypes.node
     ])
 }
-
-export default ProfessionProvider

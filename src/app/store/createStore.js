@@ -1,14 +1,18 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import qualityReducer from './qualities'
-import professionReducer from './professions'
+import qualitiesReducer from './qualities'
+import professionsReducer from './professions'
+import usersReducer from './users'
+import commentsReducer from './comments'
 
 const rootReducer = combineReducers({
-  qualities: qualityReducer,
-  professions: professionReducer
+    qualities: qualitiesReducer,
+    professions: professionsReducer,
+    users: usersReducer,
+    comments: commentsReducer
 })
 
 export function createStore() {
-  return configureStore({
-    reducer: rootReducer
-  })
+    return configureStore({
+        reducer: rootReducer
+    })
 }
